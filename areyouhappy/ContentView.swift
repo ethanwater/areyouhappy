@@ -68,14 +68,14 @@ struct ContentView: View {
     @State private var isHoveredNo = false
     @State private var isHoveredYes = false
     @State private var headerText = "Hello"
-    @State private var questionText = "Are you happy?"
+    @State private var questionText = "Are you feeling sad today?"
     @State private var showButtons = true
     @State private var currentWindow: NSWindow?
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            HStack(spacing: 15) {
-                GIFView(gifName: "plus")
+        VStack(alignment: .leading) {
+            HStack() {
+                GIFView(gifName: "heart")
                     .frame(width: 60, height: 60)
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Hello")
@@ -87,7 +87,6 @@ struct ContentView: View {
                         .animation(.easeInOut(duration: 0.3), value: questionText)
                         .foregroundColor(.black)
                 }
-                Spacer()
             }
             
             if showButtons {
@@ -105,55 +104,17 @@ struct ContentView: View {
                     }
                     .buttonStyle(.plain)
                     .background(
-                        ZStack {
-                            // Base glass layer
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: isHoveredYes ? [
-                                            Color.green.opacity(0.8),
-                                            Color.green.opacity(0.6)
-                                        ] : [
-                                            Color.white.opacity(0.9),
-                                            Color.white.opacity(0.8)
-                                        ]),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                )
-                                .blur(radius: 0.5)
-                            
-                            // Liquid shine effect
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(
-                                    LinearGradient(
-                                        gradient: Gradient(stops: [
-                                            .init(color: Color.white.opacity(0.4), location: 0.0),
-                                            .init(color: Color.white.opacity(0.2), location: 0.3),
-                                            .init(color: Color.clear, location: 0.7)
-                                        ]),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                )
-                            
-                            // Inner glow
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [
-                                            Color.white.opacity(0.8),
-                                            Color.white.opacity(0.2)
-                                        ]),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ),
-                                    lineWidth: 1.0
-                                )
-                                .padding(0.5)
-                        }
-                    )
-                    .shadow(color: isHoveredYes ? Color.blue.opacity(0.6) : Color.black.opacity(0.1), radius: isHoveredYes ? 15 : 8, x: 0, y: isHoveredYes ? 6 : 4)
+                                            ZStack {
+                                                // Base layer
+                                                RoundedRectangle(cornerRadius: 16)
+                                                    .fill(isHoveredYes ? Color.red : Color.white.opacity(0.9))
+                                                
+                                                // Border
+                                                RoundedRectangle(cornerRadius: 16)
+                                                    .stroke(Color.black.opacity(0.4), lineWidth: 1.0)
+                                                    .padding(0.5)
+                                            }
+                                        )
                     .scaleEffect(isHoveredYes ? 1.025 : 1.0)
                     .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isHoveredYes)
                     .onHover { hovering in
@@ -173,55 +134,17 @@ struct ContentView: View {
                     }
                     .buttonStyle(.plain)
                     .background(
-                        ZStack {
-                            // Base glass layer
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: isHoveredNo ? [
-                                            Color.red.opacity(0.8),
-                                            Color.red.opacity(0.6)
-                                        ] : [
-                                            Color.white.opacity(0.9),
-                                            Color.white.opacity(0.8)
-                                        ]),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                )
-                                .blur(radius: 0.5)
-                            
-                            // Liquid shine effect
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(
-                                    LinearGradient(
-                                        gradient: Gradient(stops: [
-                                            .init(color: Color.white.opacity(0.4), location: 0.0),
-                                            .init(color: Color.white.opacity(0.2), location: 0.3),
-                                            .init(color: Color.clear, location: 0.5)
-                                        ]),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    )
-                                )
-                            
-                            // Inner glow
-                            RoundedRectangle(cornerRadius: 16)
-                                .stroke(
-                                    LinearGradient(
-                                        gradient: Gradient(colors: [
-                                            Color.white.opacity(0.8),
-                                            Color.white.opacity(0.2)
-                                        ]),
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ),
-                                    lineWidth: 1.0
-                                )
-                                .padding(0.5)
-                        }
-                    )
-                    .shadow(color: isHoveredNo ? Color.red.opacity(0.6) : Color.black.opacity(0.1), radius: isHoveredNo ? 2 : 2, x: 0, y: isHoveredNo ? 0 : 0)
+                                            ZStack {
+                                                // Base layer
+                                                RoundedRectangle(cornerRadius: 16)
+                                                    .fill(isHoveredNo ? Color.red : Color.white.opacity(0.9))
+                                                
+                                                // Border
+                                                RoundedRectangle(cornerRadius: 16)
+                                                    .stroke(Color.black.opacity(0.4), lineWidth: 1.0)
+                                                    .padding(0.5)
+                                            }
+                                        )
                     .scaleEffect(isHoveredNo ? 1.025 : 1.0)
                     .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isHoveredNo)
                     .onHover { hovering in
@@ -229,7 +152,6 @@ struct ContentView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
-                .transition(.opacity)
             }
         }
         .padding(20)
@@ -237,20 +159,17 @@ struct ContentView: View {
         .didMoveToWindow { window in
             currentWindow = window
             window.isOpaque = false
-            window.backgroundColor = NSColor(white: 0.1, alpha: 0.4)
+            window.backgroundColor = NSColor(white: 1.0, alpha: 1.0)
             // This prevents the background from resetting
             if let contentView = window.contentView {
                 contentView.wantsLayer = true
-                contentView.layer?.backgroundColor = NSColor(white: 1.0, alpha: 0.95).cgColor
+                contentView.layer?.backgroundColor = NSColor(white: 1.0, alpha: 0.0).cgColor
             }
         }
     }
     
     private func handleResponse() {
-        // Close window after 1 second
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
-            NSApplication.shared.terminate(nil)
-        }
+        NSApplication.shared.terminate(nil)
     }
 }
 

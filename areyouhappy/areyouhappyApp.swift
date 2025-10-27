@@ -17,7 +17,6 @@ struct areyouhappyApp: App {
                 .toolbar(removing: .title)
         }
         .windowResizability(.contentSize)
-        
     }
 }
 
@@ -29,7 +28,6 @@ struct BackgroundWindowModifier: NSViewRepresentable {
                 window.standardWindowButton(.closeButton)?.isHidden = false
                 window.standardWindowButton(.miniaturizeButton)?.isHidden = true
                 window.standardWindowButton(.zoomButton)?.isHidden = true
-                window.titlebarAppearsTransparent = true
             }
         }
         return view
