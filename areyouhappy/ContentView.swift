@@ -67,8 +67,8 @@ struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme
     @State private var isHoveredNo = false
     @State private var isHoveredYes = false
-    @State private var headerText = "Hello"
-    @State private var questionText = "Are you feeling sad today?"
+    @State private var headerText = ""
+    @State private var questionText = "Are you happy?"
     @State private var showButtons = true
     @State private var currentWindow: NSWindow?
 
@@ -78,7 +78,7 @@ struct ContentView: View {
                 GIFView(gifName: "heart")
                     .frame(width: 60, height: 60)
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Hello")
+                    Text("Hi!")
                         .font(.headline)
                         .fontWeight(.semibold)
                         .foregroundColor(.black)
@@ -116,10 +116,11 @@ struct ContentView: View {
                                             }
                                         )
                     .scaleEffect(isHoveredYes ? 1.025 : 1.0)
-                    .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isHoveredYes)
+                    //.animation(.spring(response: 0.3, dampingFraction: 0.6), value: isHoveredYes)
                     .onHover { hovering in
                         isHoveredYes = hovering
                     }
+                    .glassEffect()
                     
                     
                     Button(action: {
@@ -146,10 +147,11 @@ struct ContentView: View {
                                             }
                                         )
                     .scaleEffect(isHoveredNo ? 1.025 : 1.0)
-                    .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isHoveredNo)
+                    //.animation(.spring(response: 0.3, dampingFraction: 0.6), value: isHoveredNo)
                     .onHover { hovering in
                         isHoveredNo = hovering
                     }
+                    .glassEffect()
                 }
                 .frame(maxWidth: .infinity)
             }
